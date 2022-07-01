@@ -11,13 +11,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import io.github.ilyaskerbal.calorytracker.ui.theme.CaloryTrackerTheme
+import io.github.ilyaskerbal.onboarding_presentation.welcome.WelcomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             CaloryTrackerTheme {
-
+                WelcomeScreen()
             }
         }
     }
