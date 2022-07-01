@@ -1,5 +1,3 @@
-import kotlin.jvm.internal.Intrinsics
-
 object Build {
     private const val androidBuildToolsVersion = "7.2.1"
     const val androidBuildTools = "com.android.tools.build:gradle:$androidBuildToolsVersion"

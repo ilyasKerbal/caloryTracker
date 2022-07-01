@@ -1,15 +1,21 @@
 buildscript {
-    ext {
-        compose_version = '1.1.0-beta01'
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
     }
-}// Top-level build file where you can add configuration options common to all sub-projects/modules.
+    dependencies {
+        classpath(Build.hiltAndroidGradlePlugin)
+    }
+}
 plugins {
-    id 'com.android.application' version '7.2.1' apply false
-    id 'com.android.library' version '7.2.1' apply false
-    id 'org.jetbrains.kotlin.android' version '1.7.0' apply false
-    id 'org.jetbrains.kotlin.jvm' version '1.7.0' apply false
+    id(CorePlugins.androidApplication) version CorePlugins.androidApplicationVersion apply false
+    id(CorePlugins.androidLibrary) version CorePlugins.androidLibraryVersion apply false
+    id(CorePlugins.kotlinAndroid) version CorePlugins.kotlinAndroidVersion apply false
+    id(CorePlugins.kotlinJVM) version CorePlugins.kotlinJVMVersion apply false
+    id(CorePlugins.hiltAndroid) version CorePlugins.hiltAndroidVersion apply false
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+tasks.register("clean", Delete::class) {
+    delete(rootProject.buildDir)
 }
