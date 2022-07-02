@@ -9,11 +9,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import io.github.ilyaskerbal.core.R
+import io.github.ilyaskerbal.core.navigation.Route
+import io.github.ilyaskerbal.core.util.UIEvent
 import io.github.ilyaskerbal.core_ui.LocalSpacing
 import io.github.ilyaskerbal.onboarding_presentation.components.ActionButton
 
 @Composable
-fun WelcomeScreen() {
+fun WelcomeScreen(
+    onNavigate: (UIEvent.Navigate) -> Unit
+) {
     val spacing = LocalSpacing.current
     Column(
         modifier = Modifier.fillMaxSize()
@@ -29,7 +33,7 @@ fun WelcomeScreen() {
         Spacer(modifier = Modifier.height(spacing.spaceMedium))
         ActionButton(
             text = stringResource(id = R.string.next),
-            onClick = { /*TODO*/ },
+            onClick = { onNavigate(UIEvent.Navigate(Route.AGE)) },
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
     }
