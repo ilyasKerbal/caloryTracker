@@ -20,6 +20,7 @@ import io.github.ilyaskerbal.onboarding_presentation.age.AgeScreen
 import io.github.ilyaskerbal.onboarding_presentation.gender.GenderScreen
 import io.github.ilyaskerbal.onboarding_presentation.goal.GoalScreen
 import io.github.ilyaskerbal.onboarding_presentation.height.HeightScreen
+import io.github.ilyaskerbal.onboarding_presentation.nutrient_goal.NutrientGoalScreen
 import io.github.ilyaskerbal.onboarding_presentation.weight.WeightScreen
 import io.github.ilyaskerbal.onboarding_presentation.welcome.WelcomeScreen
 
@@ -64,7 +65,10 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable(Route.NUTRIENT_GOAL){
-
+                            NutrientGoalScreen(
+                                scaffoldState = scaffoldState,
+                                onNavigate = navController::navigate
+                            )
                         }
                         composable(Route.ACTIVITY){
                             ActivityScreen(onNavigate = navController::navigate)
@@ -75,7 +79,7 @@ class MainActivity : ComponentActivity() {
                         composable(Route.TRACKER_OVERVIEW){
 
                         }
-                        composable(Route.NUTRIENT_GOAL){
+                        composable(Route.SEARCH){
 
                         }
                     }
