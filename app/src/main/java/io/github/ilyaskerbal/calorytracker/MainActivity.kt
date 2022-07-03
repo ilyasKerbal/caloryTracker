@@ -18,6 +18,7 @@ import io.github.ilyaskerbal.core.navigation.Route
 import io.github.ilyaskerbal.onboarding_presentation.activity.ActivityScreen
 import io.github.ilyaskerbal.onboarding_presentation.age.AgeScreen
 import io.github.ilyaskerbal.onboarding_presentation.gender.GenderScreen
+import io.github.ilyaskerbal.onboarding_presentation.goal.GoalScreen
 import io.github.ilyaskerbal.onboarding_presentation.height.HeightScreen
 import io.github.ilyaskerbal.onboarding_presentation.weight.WeightScreen
 import io.github.ilyaskerbal.onboarding_presentation.welcome.WelcomeScreen
@@ -69,7 +70,7 @@ class MainActivity : ComponentActivity() {
                             ActivityScreen(onNavigate = navController::navigate)
                         }
                         composable(Route.GOAL){
-
+                            GoalScreen(onNavigate = navController::navigate)
                         }
                         composable(Route.TRACKER_OVERVIEW){
 
