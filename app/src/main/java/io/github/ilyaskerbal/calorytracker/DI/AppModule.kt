@@ -9,6 +9,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.github.ilyaskerbal.core.data.preferences.DefaultPreferences
 import io.github.ilyaskerbal.core.domain.preferences.Preferences
+import io.github.ilyaskerbal.core.domain.use_case.FilterOutDigits
 import javax.inject.Singleton
 
 @Module
@@ -26,5 +27,11 @@ object AppModule {
     fun providePreferences(
         sharedPreferences: SharedPreferences
     ) : Preferences = DefaultPreferences(sharedPreferences)
+
+    @Provides
+    @Singleton
+    fun provideFilterOutDigitsUseCase() : FilterOutDigits {
+        return FilterOutDigits()
+    }
 
 }
