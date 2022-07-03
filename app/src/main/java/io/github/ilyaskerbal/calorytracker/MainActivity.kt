@@ -18,6 +18,7 @@ import io.github.ilyaskerbal.core.navigation.Route
 import io.github.ilyaskerbal.onboarding_presentation.age.AgeScreen
 import io.github.ilyaskerbal.onboarding_presentation.gender.GenderScreen
 import io.github.ilyaskerbal.onboarding_presentation.height.HeightScreen
+import io.github.ilyaskerbal.onboarding_presentation.weight.WeightScreen
 import io.github.ilyaskerbal.onboarding_presentation.welcome.WelcomeScreen
 
 @AndroidEntryPoint
@@ -55,7 +56,10 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable(Route.WEIGHT){
-
+                            WeightScreen(
+                                scaffoldState = scaffoldState,
+                                onNavigate = navController::navigate
+                            )
                         }
                         composable(Route.NUTRIENT_GOAL){
 

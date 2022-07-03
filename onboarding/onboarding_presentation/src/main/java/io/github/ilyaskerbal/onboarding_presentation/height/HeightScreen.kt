@@ -30,7 +30,7 @@ fun HeightScreen(
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is UIEvent.Navigate -> onNavigate(event)
-                is UIEvent.showSnackbar -> {
+                is UIEvent.ShowSnackbar -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = event.message.asString(context)
                     )
