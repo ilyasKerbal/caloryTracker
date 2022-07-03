@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import io.github.ilyaskerbal.core_ui.LocalSpacing
 
@@ -24,7 +25,9 @@ fun SelectableButton(
     selectedTextColor: Color,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    textStyle: TextStyle = MaterialTheme.typography.button
+    textStyle: TextStyle = MaterialTheme.typography.button.copy(
+        fontWeight = FontWeight.Normal
+    )
 ) {
     val roundedCornerShape = RoundedCornerShape(100.dp)
     Box(
