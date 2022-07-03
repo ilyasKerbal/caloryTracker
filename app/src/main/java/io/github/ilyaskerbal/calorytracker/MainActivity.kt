@@ -15,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.github.ilyaskerbal.calorytracker.navigation.navigate
 import io.github.ilyaskerbal.calorytracker.ui.theme.CaloryTrackerTheme
 import io.github.ilyaskerbal.core.navigation.Route
+import io.github.ilyaskerbal.onboarding_presentation.activity.ActivityScreen
 import io.github.ilyaskerbal.onboarding_presentation.age.AgeScreen
 import io.github.ilyaskerbal.onboarding_presentation.gender.GenderScreen
 import io.github.ilyaskerbal.onboarding_presentation.height.HeightScreen
@@ -65,7 +66,7 @@ class MainActivity : ComponentActivity() {
 
                         }
                         composable(Route.ACTIVITY){
-
+                            ActivityScreen(onNavigate = navController::navigate)
                         }
                         composable(Route.GOAL){
 
