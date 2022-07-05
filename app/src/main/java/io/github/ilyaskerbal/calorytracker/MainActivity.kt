@@ -23,6 +23,7 @@ import io.github.ilyaskerbal.onboarding_presentation.height.HeightScreen
 import io.github.ilyaskerbal.onboarding_presentation.nutrient_goal.NutrientGoalScreen
 import io.github.ilyaskerbal.onboarding_presentation.weight.WeightScreen
 import io.github.ilyaskerbal.onboarding_presentation.welcome.WelcomeScreen
+import io.github.ilyaskerbal.tracker_presentation.TrackerOverviewScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -77,7 +78,7 @@ class MainActivity : ComponentActivity() {
                             GoalScreen(onNavigate = navController::navigate)
                         }
                         composable(Route.TRACKER_OVERVIEW){
-
+                            TrackerOverviewScreen(onNavigate = navController::navigate)
                         }
                         composable(Route.SEARCH){
 
