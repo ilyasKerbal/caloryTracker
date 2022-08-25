@@ -16,9 +16,9 @@ import androidx.compose.ui.unit.sp
 import io.github.ilyaskerbal.core_ui.LocalSpacing
 import io.github.ilyaskerbal.tracker_presentation.tracker_overview.TrackerOverviewState
 import io.github.ilyaskerbal.core.R
-import io.github.ilyaskerbal.core_ui.CarbColor
-import io.github.ilyaskerbal.core_ui.FatColor
-import io.github.ilyaskerbal.core_ui.ProteinColor
+import io.github.ilyaskerbal.core_ui.theme.CarbColor
+import io.github.ilyaskerbal.core_ui.theme.FatColor
+import io.github.ilyaskerbal.core_ui.theme.ProteinColor
 
 @Composable
 fun NutrientsHeader(

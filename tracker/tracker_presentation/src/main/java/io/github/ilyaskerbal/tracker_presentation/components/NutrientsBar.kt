@@ -9,9 +9,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Size
-import io.github.ilyaskerbal.core_ui.CarbColor
-import io.github.ilyaskerbal.core_ui.FatColor
-import io.github.ilyaskerbal.core_ui.ProteinColor
+import io.github.ilyaskerbal.core_ui.theme.CarbColor
+import io.github.ilyaskerbal.core_ui.theme.FatColor
+import io.github.ilyaskerbal.core_ui.theme.ProteinColor
 
 @Composable
 fun NutrientsBar(

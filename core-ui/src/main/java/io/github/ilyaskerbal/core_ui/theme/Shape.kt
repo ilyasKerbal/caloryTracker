@@ -1,4 +1,4 @@
-package io.github.ilyaskerbal.calorytracker.ui.theme
+package io.github.ilyaskerbal.core_ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

@@ -1,6 +1,5 @@
 package io.github.ilyaskerbal.calorytracker
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,14 +8,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.ilyaskerbal.calorytracker.navigation.navigate
-import io.github.ilyaskerbal.calorytracker.ui.theme.CaloryTrackerTheme
 import io.github.ilyaskerbal.core.navigation.Route
+import io.github.ilyaskerbal.core_ui.theme.CaloryTrackerTheme
 import io.github.ilyaskerbal.onboarding_presentation.activity.ActivityScreen
 import io.github.ilyaskerbal.onboarding_presentation.age.AgeScreen
 import io.github.ilyaskerbal.onboarding_presentation.gender.GenderScreen
