@@ -1,5 +1,6 @@
 package io.github.ilyaskerbal.onboarding_presentation.age
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ScaffoldState
@@ -10,10 +11,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import io.github.ilyaskerbal.core.R
 import io.github.ilyaskerbal.core.util.UIEvent
 import io.github.ilyaskerbal.core_ui.LocalSpacing
+import io.github.ilyaskerbal.core_ui.theme.CaloryTrackerTheme
 import io.github.ilyaskerbal.onboarding_presentation.components.ActionButton
 import io.github.ilyaskerbal.onboarding_presentation.components.UnitTextField
 import kotlinx.coroutines.flow.collect
@@ -24,7 +28,6 @@ fun AgeScreen(
     onNavigate: (UIEvent.Navigate) -> Unit,
     viewModel: AgeViewModel = hiltViewModel()
 ) {
-    val spacing = LocalSpacing.current
     val context = LocalContext.current
 
     LaunchedEffect(key1 = true) {
@@ -40,6 +43,21 @@ fun AgeScreen(
             }
         }
     }
+
+    AgeScreenContent(
+        age = viewModel.age,
+        onValueChanged = viewModel::onAgeEnter,
+        onNext = viewModel::onNextClick
+    )
+}
+
+@Composable
+private fun AgeScreenContent(
+    age: String,
+    onValueChanged: (String) -> Unit,
+    onNext: () -> Unit
+) {
+    val spacing = LocalSpacing.current
 
     Box(
         modifier = Modifier
@@ -58,16 +76,29 @@ fun AgeScreen(
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
             UnitTextField(
-                value = viewModel.age,
-                onValueChange = viewModel::onAgeEnter,
+                value = age,
+                onValueChange = onValueChanged,
                 unit = stringResource(id = R.string.years)
             )
         }
 
         ActionButton(
             text = stringResource(id = R.string.next),
-            onClick = viewModel::onNextClick,
+            onClick = onNext,
             modifier = Modifier.align(Alignment.BottomEnd)
         )
+    }
+}
+
+@Preview(
+    name = "Light Theme",
+    device = Devices.PIXEL_2,
+    uiMode = Configuration.UI_MODE_TYPE_NORMAL,
+    showBackground = true
+)
+@Composable
+private fun PreviewAgeScreen() {
+    CaloryTrackerTheme {
+        AgeScreenContent(age = "26", onValueChanged = {}, onNext = {})
     }
 }

@@ -1,5 +1,6 @@
 package io.github.ilyaskerbal.onboarding_presentation.goal
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -10,21 +11,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import io.github.ilyaskerbal.core.domain.model.GoalType
 import io.github.ilyaskerbal.core.util.UIEvent
 import io.github.ilyaskerbal.core_ui.LocalSpacing
 import io.github.ilyaskerbal.onboarding_presentation.components.ActionButton
 import io.github.ilyaskerbal.onboarding_presentation.components.SelectableButton
-import kotlinx.coroutines.flow.collect
 import io.github.ilyaskerbal.core.R
+import io.github.ilyaskerbal.core_ui.theme.CaloryTrackerTheme
 
 @Composable
 fun GoalScreen(
     onNavigate: (UIEvent.Navigate) -> Unit,
     viewModel: GoalViewModel = hiltViewModel()
 ) {
-    val spacing = LocalSpacing.current
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { event ->
             when (event) {
@@ -33,6 +35,22 @@ fun GoalScreen(
             }
         }
     }
+
+    GoalScreenContent(
+        selectedGoal = viewModel.selectedGoal,
+        onGoalSelected = viewModel::onGoalTypeSelect,
+        onNext = viewModel::onNextClick
+    )
+
+}
+
+@Composable
+private fun GoalScreenContent(
+    selectedGoal: GoalType,
+    onGoalSelected: (GoalType) -> Unit,
+    onNext: () -> Unit
+) {
+    val spacing = LocalSpacing.current
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -51,11 +69,11 @@ fun GoalScreen(
             Row {
                 SelectableButton(
                     text = stringResource(id = R.string.lose),
-                    isSelected = viewModel.selectedGoal is GoalType.LoseWeight,
+                    isSelected = selectedGoal is GoalType.LoseWeight,
                     color = MaterialTheme.colors.primaryVariant,
                     selectedTextColor = Color.White,
                     onClick = {
-                        viewModel.onGoalTypeSelect(GoalType.LoseWeight)
+                        onGoalSelected(GoalType.LoseWeight)
                     },
                     textStyle = MaterialTheme.typography.button.copy(
                         fontWeight = FontWeight.Normal
@@ -64,11 +82,11 @@ fun GoalScreen(
                 Spacer(modifier = Modifier.width(spacing.spaceMedium))
                 SelectableButton(
                     text = stringResource(id = R.string.keep),
-                    isSelected = viewModel.selectedGoal is GoalType.KeepWeight,
+                    isSelected = selectedGoal is GoalType.KeepWeight,
                     color = MaterialTheme.colors.primaryVariant,
                     selectedTextColor = Color.White,
                     onClick = {
-                        viewModel.onGoalTypeSelect(GoalType.KeepWeight)
+                        onGoalSelected(GoalType.KeepWeight)
                     },
                     textStyle = MaterialTheme.typography.button.copy(
                         fontWeight = FontWeight.Normal
@@ -77,11 +95,11 @@ fun GoalScreen(
                 Spacer(modifier = Modifier.width(spacing.spaceMedium))
                 SelectableButton(
                     text = stringResource(id = R.string.gain),
-                    isSelected = viewModel.selectedGoal is GoalType.GainWeight,
+                    isSelected = selectedGoal is GoalType.GainWeight,
                     color = MaterialTheme.colors.primaryVariant,
                     selectedTextColor = Color.White,
                     onClick = {
-                        viewModel.onGoalTypeSelect(GoalType.GainWeight)
+                        onGoalSelected(GoalType.GainWeight)
                     },
                     textStyle = MaterialTheme.typography.button.copy(
                         fontWeight = FontWeight.Normal
@@ -91,8 +109,25 @@ fun GoalScreen(
         }
         ActionButton(
             text = stringResource(id = R.string.next),
-            onClick = viewModel::onNextClick,
+            onClick = onNext,
             modifier = Modifier.align(Alignment.BottomEnd)
+        )
+    }
+}
+
+@Preview(
+    name = "Light Theme",
+    device = Devices.PIXEL_2,
+    uiMode = Configuration.UI_MODE_TYPE_NORMAL,
+    showBackground = true
+)
+@Composable
+private fun PreviewGoalScreen() {
+    CaloryTrackerTheme {
+        GoalScreenContent(
+            selectedGoal = GoalType.KeepWeight,
+            onGoalSelected = {},
+            onNext = {}
         )
     }
 }

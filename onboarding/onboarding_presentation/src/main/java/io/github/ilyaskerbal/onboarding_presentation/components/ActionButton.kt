@@ -8,8 +8,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.ilyaskerbal.core_ui.LocalSpacing
+import io.github.ilyaskerbal.core_ui.theme.CaloryTrackerTheme
 
 @Composable
 fun ActionButton(
@@ -31,5 +33,13 @@ fun ActionButton(
             color = MaterialTheme.colors.onPrimary,
             modifier = Modifier.padding(LocalSpacing.current.spaceSmall)
         )
+    }
+}
+
+@Preview()
+@Composable
+private fun PreviewActionButton() {
+    CaloryTrackerTheme {
+        ActionButton(text = "Next ➡", onClick = { })
     }
 }

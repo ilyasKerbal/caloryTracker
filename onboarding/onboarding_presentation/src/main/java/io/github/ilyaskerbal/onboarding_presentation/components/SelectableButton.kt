@@ -14,8 +14,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.ilyaskerbal.core_ui.LocalSpacing
+import io.github.ilyaskerbal.core_ui.theme.CaloryTrackerTheme
 
 @Composable
 fun SelectableButton(
@@ -46,5 +48,31 @@ fun SelectableButton(
             style = textStyle,
             color = if (isSelected) selectedTextColor else color
         )
+    }
+}
+
+@Preview(name = "Button not selected")
+@Composable
+private fun PreviewSelectableButtonNotSelected() {
+    CaloryTrackerTheme {
+        SelectableButton(
+            text = "Not Selected",
+            isSelected = false,
+            color = MaterialTheme.colors.primaryVariant,
+            selectedTextColor = Color.White,
+            onClick = { /*TODO*/ })
+    }
+}
+
+@Preview(name = "Button selected")
+@Composable
+private fun PreviewSelectableButtonSelected() {
+    CaloryTrackerTheme {
+        SelectableButton(
+            text = "Selected ✅",
+            isSelected = true,
+            color = MaterialTheme.colors.primaryVariant,
+            selectedTextColor = Color.White,
+            onClick = { /*TODO*/ })
     }
 }

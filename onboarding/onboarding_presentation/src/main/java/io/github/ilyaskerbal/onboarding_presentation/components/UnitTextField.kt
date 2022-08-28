@@ -10,8 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import io.github.ilyaskerbal.core_ui.LocalSpacing
+import io.github.ilyaskerbal.core_ui.theme.CaloryTrackerTheme
 
 @Composable
 fun UnitTextField(
@@ -48,5 +50,21 @@ fun UnitTextField(
             text = unit,
             modifier = Modifier.alignBy(LastBaseline)
         )
+    }
+}
+
+@Preview(name = "Age preview")
+@Composable
+private fun PreviewUnitTextFieldAge() {
+    CaloryTrackerTheme {
+        UnitTextField(value = "27", onValueChange = {}, unit = "Years")
+    }
+}
+
+@Preview(name = "Height preview")
+@Composable
+private fun PreviewUnitTextFieldHeight() {
+    CaloryTrackerTheme {
+        UnitTextField(value = "180", onValueChange = {}, unit = "Cm")
     }
 }

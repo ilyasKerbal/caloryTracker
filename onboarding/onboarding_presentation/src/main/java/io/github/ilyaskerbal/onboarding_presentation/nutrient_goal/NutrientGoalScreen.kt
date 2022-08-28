@@ -1,5 +1,6 @@
 package io.github.ilyaskerbal.onboarding_presentation.nutrient_goal
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ScaffoldState
@@ -10,12 +11,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import io.github.ilyaskerbal.core.util.UIEvent
 import io.github.ilyaskerbal.core_ui.LocalSpacing
 import io.github.ilyaskerbal.onboarding_presentation.components.UnitTextField
-import kotlinx.coroutines.flow.collect
 import io.github.ilyaskerbal.core.R
+import io.github.ilyaskerbal.core_ui.theme.CaloryTrackerTheme
 import io.github.ilyaskerbal.onboarding_presentation.components.ActionButton
 
 @Composable
@@ -24,7 +27,6 @@ fun NutrientGoalScreen(
     onNavigate: (UIEvent.Navigate) -> Unit,
     viewModel: NutrientGoalViewModel = hiltViewModel()
 ) {
-    val spacing = LocalSpacing.current
     val context = LocalContext.current
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { event ->
@@ -39,6 +41,18 @@ fun NutrientGoalScreen(
             }
         }
     }
+    NutrientGoalScreenContent(
+        currentState = viewModel.state,
+        onNutrientEvent = viewModel::onEvent
+    )
+}
+
+@Composable
+private fun NutrientGoalScreenContent(
+    currentState: NutrientGoalState,
+    onNutrientEvent: (NutrientGoalEvent) -> Unit
+) {
+    val spacing = LocalSpacing.current
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -55,25 +69,25 @@ fun NutrientGoalScreen(
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
             UnitTextField(
-                value = viewModel.state.carbsRatio,
+                value = currentState.carbsRatio,
                 onValueChange = {
-                    viewModel.onEvent(NutrientGoalEvent.OnCarbRatioEnter(it))
+                    onNutrientEvent(NutrientGoalEvent.OnCarbRatioEnter(it))
                 },
                 unit = stringResource(id = R.string.percent_carbs)
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
             UnitTextField(
-                value = viewModel.state.proteinRatio,
+                value = currentState.proteinRatio,
                 onValueChange = {
-                    viewModel.onEvent(NutrientGoalEvent.OnProteinRatioEnter(it))
+                    onNutrientEvent(NutrientGoalEvent.OnProteinRatioEnter(it))
                 },
                 unit = stringResource(id = R.string.percent_proteins)
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
             UnitTextField(
-                value = viewModel.state.fatRatio,
+                value = currentState.fatRatio,
                 onValueChange = {
-                    viewModel.onEvent(NutrientGoalEvent.OnFatRatioEnter(it))
+                    onNutrientEvent(NutrientGoalEvent.OnFatRatioEnter(it))
                 },
                 unit = stringResource(id = R.string.percent_fats)
             )
@@ -81,9 +95,25 @@ fun NutrientGoalScreen(
         ActionButton(
             text = stringResource(id = R.string.next),
             onClick = {
-                viewModel.onEvent(NutrientGoalEvent.OnNextClick)
+                onNutrientEvent(NutrientGoalEvent.OnNextClick)
             },
             modifier = Modifier.align(Alignment.BottomEnd)
+        )
+    }
+}
+
+@Preview(
+    name = "Light Theme",
+    device = Devices.PIXEL_2,
+    uiMode = Configuration.UI_MODE_TYPE_NORMAL,
+    showBackground = true
+)
+@Composable
+private fun PreviewNutrientGoalScreen() {
+    CaloryTrackerTheme {
+        NutrientGoalScreenContent(
+            currentState = NutrientGoalState(),
+            onNutrientEvent = {}
         )
     }
 }

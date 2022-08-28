@@ -1,5 +1,6 @@
 package io.github.ilyaskerbal.onboarding_presentation.gender
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -9,21 +10,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import io.github.ilyaskerbal.core.R
 import io.github.ilyaskerbal.core.domain.model.Gender
 import io.github.ilyaskerbal.core.util.UIEvent
 import io.github.ilyaskerbal.core_ui.LocalSpacing
+import io.github.ilyaskerbal.core_ui.theme.CaloryTrackerTheme
 import io.github.ilyaskerbal.onboarding_presentation.components.ActionButton
 import io.github.ilyaskerbal.onboarding_presentation.components.SelectableButton
-import kotlinx.coroutines.flow.collect
 
 @Composable
 fun GenderScreen(
     onNavigate: (UIEvent.Navigate) -> Unit,
     viewModel: GenderViewModel = hiltViewModel()
 ){
-    val spacing = LocalSpacing.current
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { event ->
             when(event) {
@@ -32,6 +34,23 @@ fun GenderScreen(
             }
         }
     }
+
+    GenderScreenContent(
+        currentGender = viewModel.selectedGender,
+        onMaleSelected = { viewModel.onGenderClick(Gender.Male) },
+        onFemaleSelected = { viewModel.onGenderClick(Gender.Female) },
+        onNext = viewModel::onNextClick
+    )
+}
+
+@Composable
+private fun GenderScreenContent(
+    currentGender: Gender,
+    onMaleSelected: () -> Unit,
+    onFemaleSelected: () -> Unit,
+    onNext: () -> Unit
+) {
+    val spacing = LocalSpacing.current
 
     Box(
         modifier = Modifier
@@ -51,29 +70,43 @@ fun GenderScreen(
             Row {
                 SelectableButton(
                     text = stringResource(id = R.string.male),
-                    isSelected = viewModel.selectedGender is Gender.Male,
+                    isSelected = currentGender is Gender.Male,
                     color = MaterialTheme.colors.primaryVariant,
                     selectedTextColor = Color.White,
-                    onClick = {
-                        viewModel.onGenderClick(Gender.Male)
-                    }
+                    onClick = onMaleSelected
                 )
                 Spacer(modifier = Modifier.width(spacing.spaceMedium))
                 SelectableButton(
                     text = stringResource(id = R.string.female),
-                    isSelected = viewModel.selectedGender is Gender.Female,
+                    isSelected = currentGender is Gender.Female,
                     color = MaterialTheme.colors.primaryVariant,
                     selectedTextColor = Color.White,
-                    onClick = {
-                        viewModel.onGenderClick(Gender.Female)
-                    }
+                    onClick = onFemaleSelected
                 )
             }
         }
         ActionButton(
             text = stringResource(id = R.string.next),
-            onClick = viewModel::onNextClick,
+            onClick = onNext,
             modifier = Modifier.align(Alignment.BottomEnd)
+        )
+    }
+}
+
+@Preview(
+    name = "Light Theme",
+    device = Devices.PIXEL_2,
+    uiMode = Configuration.UI_MODE_TYPE_NORMAL,
+    showBackground = true
+)
+@Composable
+private fun PreviewGenderScreen() {
+    CaloryTrackerTheme {
+        GenderScreenContent(
+            currentGender = Gender.Male,
+            onMaleSelected = {},
+            onFemaleSelected = {},
+            onNext = {}
         )
     }
 }
