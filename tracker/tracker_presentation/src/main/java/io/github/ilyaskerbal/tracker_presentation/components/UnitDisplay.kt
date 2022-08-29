@@ -9,9 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.LastBaseline
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import io.github.ilyaskerbal.core_ui.LocalSpacing
+import io.github.ilyaskerbal.core_ui.theme.CaloryTrackerTheme
 
 @Composable
 fun UnitDisplay(
@@ -40,5 +42,29 @@ fun UnitDisplay(
             color = unitColor,
             modifier = Modifier.alignBy(LastBaseline)
         )
+    }
+}
+
+@Preview(
+    "Unit Display Dark Theme",
+    showBackground = true,
+    backgroundColor = 0xFF00C713
+)
+@Composable
+private fun PreviewUnitDisplayDark() {
+    CaloryTrackerTheme(darkTheme = true) {
+        UnitDisplay(amount = 2170, unit = "Kcal")
+    }
+}
+
+@Preview(
+    "Unit Display Light Theme",
+    showBackground = true,
+    backgroundColor = 0xFF00C713
+)
+@Composable
+private fun PreviewUnitDisplayLight() {
+    CaloryTrackerTheme {
+        UnitDisplay(amount = 12, unit = "g")
     }
 }

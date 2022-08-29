@@ -9,9 +9,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Size
-import io.github.ilyaskerbal.core_ui.theme.CarbColor
-import io.github.ilyaskerbal.core_ui.theme.FatColor
-import io.github.ilyaskerbal.core_ui.theme.ProteinColor
+import androidx.compose.ui.tooling.preview.Preview
+import io.github.ilyaskerbal.core_ui.theme.*
 
 @Composable
 fun NutrientsBar(
@@ -89,5 +88,47 @@ fun NutrientsBar(
                 cornerRadius = CornerRadius(100f)
             )
         }
+    }
+}
+
+@Preview(
+    name = "Empty",
+    showBackground = true,
+    widthDp = 200,
+    heightDp = 30,
+    backgroundColor = 0xFF00C713
+)
+@Composable
+private fun PreviewNutrientsBarEmpty() {
+    CaloryTrackerTheme {
+        NutrientsBar(carbs = 0, protein = 0, fat = 0, calories = 0, calorieGoal = 2000)
+    }
+}
+
+@Preview(
+    name = "Full",
+    showBackground = true,
+    widthDp = 200,
+    heightDp = 30,
+    backgroundColor = 0xFF00C713
+)
+@Composable
+private fun PreviewNutrientsBar() {
+    CaloryTrackerTheme {
+        NutrientsBar(carbs = 150, protein = 30, fat = 45, calories = 1500, calorieGoal = 2000)
+    }
+}
+
+@Preview(
+    name = "Calories exceeded",
+    showBackground = true,
+    widthDp = 200,
+    heightDp = 30,
+    backgroundColor = 0xFF00C713
+)
+@Composable
+private fun PreviewNutrientsBarExceed() {
+    CaloryTrackerTheme {
+        NutrientsBar(carbs = 250, protein = 60, fat = 55, calories = 2500, calorieGoal = 2000)
     }
 }

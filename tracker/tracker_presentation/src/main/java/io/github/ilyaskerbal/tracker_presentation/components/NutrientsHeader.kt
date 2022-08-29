@@ -11,14 +11,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.ilyaskerbal.core_ui.LocalSpacing
 import io.github.ilyaskerbal.tracker_presentation.tracker_overview.TrackerOverviewState
 import io.github.ilyaskerbal.core.R
+import io.github.ilyaskerbal.core_ui.theme.CaloryTrackerTheme
 import io.github.ilyaskerbal.core_ui.theme.CarbColor
 import io.github.ilyaskerbal.core_ui.theme.FatColor
 import io.github.ilyaskerbal.core_ui.theme.ProteinColor
+import java.time.LocalDate
 
 @Composable
 fun NutrientsHeader(
@@ -41,7 +44,7 @@ fun NutrientsHeader(
             .background(MaterialTheme.colors.primary)
             .padding(
                 horizontal = spacing.spaceLarge,
-                vertical = spacing.spaceExtraLarge
+                vertical = spacing.spaceLarge
             )
     ) {
         Row(
@@ -109,5 +112,25 @@ fun NutrientsHeader(
                 modifier = Modifier.size(90.dp)
             )
         }
+    }
+}
+
+@Preview(name = "NutrientHeader", showBackground = true)
+@Composable
+private fun PreviewNutrientsHEader() {
+    CaloryTrackerTheme {
+        NutrientsHeader(
+            state = TrackerOverviewState(
+                totalCarbs = 150,
+                totalProtein = 50,
+                totalFat = 60,
+                totalCalories = 1500,
+                carbsGoal = 250,
+                proteinGoal = 140,
+                70,
+                caloriesGoal = 2300,
+                date = LocalDate.now(),
+            )
+        )
     }
 }

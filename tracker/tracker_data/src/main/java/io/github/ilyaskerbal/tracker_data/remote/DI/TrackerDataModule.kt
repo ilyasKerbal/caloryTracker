@@ -41,7 +41,7 @@ object TrackerDataModule {
             .addConverterFactory(MoshiConverterFactory.create())
             .client(client)
             .build()
-            .create()
+            .create(OpenFoodApi::class.java)
     }
 
     @Provides
