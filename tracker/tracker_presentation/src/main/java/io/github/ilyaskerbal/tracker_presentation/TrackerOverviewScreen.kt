@@ -19,7 +19,7 @@ import io.github.ilyaskerbal.tracker_presentation.tracker_overview.TrackerOvervi
 
 @Composable
 fun TrackerOverviewScreen(
-    onNavigate: (UIEvent.Navigate) -> Unit,
+    onNavigateToSearch: (String, Int, Int, Int) -> Unit,
     viewModel: TrackerOverviewViewModel = hiltViewModel()
 ) {
 
@@ -27,14 +27,14 @@ fun TrackerOverviewScreen(
     val state = viewModel.state
     val context = LocalContext.current
 
-    LaunchedEffect(key1 = context) {
-        viewModel.uiEvent.collect { event ->
-            when(event) {
-                is UIEvent.Navigate -> onNavigate(event)
-                else -> Unit
-            }
-        }
-    }
+//    LaunchedEffect(key1 = context) {
+//        viewModel.uiEvent.collect { event ->
+//            when(event) {
+//                is UIEvent.Navigate -> onNavigateToSearch(event)
+//                else -> Unit
+//            }
+//        }
+//    }
 
     LazyColumn(
         modifier = Modifier
@@ -88,8 +88,11 @@ fun TrackerOverviewScreen(
                                   item.name.asString(context)
                               ),
                               onClick = {
-                                  viewModel.onEvent(
-                                      TrackerOverviewEvent.OnAddFoodClick(item)
+                                  onNavigateToSearch(
+                                      item.name.asString(context),
+                                      state.date.dayOfMonth,
+                                      state.date.monthValue,
+                                      state.date.year
                                   )
                               },
                               modifier = Modifier.fillMaxWidth()

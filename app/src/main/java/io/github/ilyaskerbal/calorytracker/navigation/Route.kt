@@ -1,4 +1,4 @@
-package io.github.ilyaskerbal.core.navigation
+package io.github.ilyaskerbal.calorytracker.navigation
 
 object Route {
     const val WELCOME = "welcome"

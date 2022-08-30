@@ -12,15 +12,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import io.github.ilyaskerbal.core.R
-import io.github.ilyaskerbal.core.navigation.Route
-import io.github.ilyaskerbal.core.util.UIEvent
 import io.github.ilyaskerbal.core_ui.LocalSpacing
 import io.github.ilyaskerbal.core_ui.theme.CaloryTrackerTheme
 import io.github.ilyaskerbal.onboarding_presentation.components.ActionButton
 
 @Composable
 fun WelcomeScreen(
-    onNavigate: (UIEvent.Navigate) -> Unit
+    onNextClick: () -> Unit
 ) {
     val spacing = LocalSpacing.current
     Column(
@@ -38,7 +36,7 @@ fun WelcomeScreen(
         Spacer(modifier = Modifier.height(spacing.spaceMedium))
         ActionButton(
             text = stringResource(id = R.string.next),
-            onClick = { onNavigate(UIEvent.Navigate(Route.GENDER)) },
+            onClick = { onNextClick() },
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
     }
@@ -55,6 +53,6 @@ fun WelcomeScreen(
 @Composable
 private fun PreviewWelcomeScreen() {
     CaloryTrackerTheme {
-        WelcomeScreen(onNavigate = {})
+        WelcomeScreen(onNextClick = {})
     }
 }

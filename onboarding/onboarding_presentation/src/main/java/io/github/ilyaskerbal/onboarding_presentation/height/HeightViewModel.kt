@@ -9,7 +9,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.ilyaskerbal.core.R
 import io.github.ilyaskerbal.core.domain.preferences.Preferences
 import io.github.ilyaskerbal.core.domain.use_case.FilterOutDigits
-import io.github.ilyaskerbal.core.navigation.Route
 import io.github.ilyaskerbal.core.util.UIEvent
 import io.github.ilyaskerbal.core.util.UIText
 import kotlinx.coroutines.channels.Channel
@@ -46,7 +45,7 @@ class HeightViewModel @Inject constructor(
                 return@launch
             }
             preferences.saveHeight(heightNumber)
-            _uiEvent.send(UIEvent.Navigate(Route.WEIGHT))
+            _uiEvent.send(UIEvent.Success)
         }
     }
 

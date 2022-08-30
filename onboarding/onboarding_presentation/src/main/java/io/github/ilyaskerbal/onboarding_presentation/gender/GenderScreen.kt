@@ -23,13 +23,13 @@ import io.github.ilyaskerbal.onboarding_presentation.components.SelectableButton
 
 @Composable
 fun GenderScreen(
-    onNavigate: (UIEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     viewModel: GenderViewModel = hiltViewModel()
 ){
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { event ->
             when(event) {
-                is UIEvent.Navigate -> onNavigate(event)
+                is UIEvent.Success -> onNextClick()
                 else -> Unit
             }
         }
